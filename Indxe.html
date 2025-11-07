@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فوركس بروفيشينال - احترف التداول من الصفر</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #1e3c72;
+            --secondary: #2a5298;
+            --accent: #ffd700;
+            --gradient: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            --light: #f8f9fa;
+            --dark: #1a1a1a;
+            --success: #28a745;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: var(--light);
+            overflow-x: hidden;
+        }
+        
+        /* الهيدر المتحرك */
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--accent), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(255,215,0,0.5); }
+            to { text-shadow: 0 0 20px rgba(255,215,0,0.8); }
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            right: 0;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        /* الهيرو مع تأثيرات */
+        .hero {
+            background: var(--gradient);
+            color: white;
+            padding: 12rem 0 8rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><path fill="rgba(255,255,255,0.05)" d="M0,0V800H1200V0ZM600,400C600,200,800,200,800,400S600,600,600,400Z"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            animation: slideInRight 1s ease-out;
+        }
+        
+        .hero-text p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            animation: slideInRight 1s ease-out 0.2s both;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255,215,0,0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .btn:hover {
+            background: #ffed4a;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,215,0,0.5);
+        }
+        
+        .book-cover {
+            text-align: center;
+            animation: slideInLeft 1s ease-out;
+        }
+        
+        .book-image {
+            width: 100%;
+            max-width: 400px;
+            height: 500px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            margin: 0 auto;
+            border: 15px solid white;
+            background: white;
+            overflow: hidden;
+            transform: perspective(1000px) rotateY(-10deg) rotateX(5deg);
+            transition: transform 0.5s;
+        }
+        
+        .book-image:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+        }
+        
+        .book-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* الأقسام */
+        section {
+            padding: 6rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--primary);
+            font-size: 2.5rem;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        /* المميزات */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.4s;
+            border: 1px solid #eaeaea;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+        
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        /* محتويات الكتاب */
+        .contents {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            position: relative;
+        }
+        
+        .chapters {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .chapter {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border-right: 5px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chapter:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 1;
+        }
+        
+        .chapter:hover:before {
+            opacity: 0.05;
+        }
+        
+        .chapter:hover {
+            transform: translateX(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .chapter h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .chapter p {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* قسم التواصل والشراء */
+        .contact {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><circle fill="rgba(255,255,255,0.05)" cx="600" cy="400" r="300"/></svg>');
+            animation: rotate 30s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .price-card {
+            background: rgba(255,255,255,0.15);
+            padding: 4rem;
+            border-radius: 25px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin: 3rem auto;
+            max-width: 500px;
+        }
+        
+        .price {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin: 1.5rem 0;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .social-btn.whatsapp {
+            background: #25D366;
+            color: white;
+        }
+        
+        .social-btn.telegram {
+            background: #0088cc;
+            color: white;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .social-btn i {
+            font-size: 1.5rem;
+        }
+        
+        .benefits {
+            list-style: none;
+            margin: 2.5rem 0;
+        }
+        
+        .benefits li {
+            margin: 1.2rem 0;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .benefits li i {
+            color: var(--accent);
+            font-size: 1.3rem;
+        }
+        
+        /* الفوتر */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+        
+        /* تأثيرات التمرير */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* أنيميشن الدخول */
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .book-image {
+                max-width: 300px;
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header>
+        <nav>
+            <div class="logo">📈 فوركس بروفيشينال</div>
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#about">عن الكتاب</a></li>
+                <li><a href="#contents">المحتوى</a></li>
+                <li><a href="#contact">الشراء</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- الهيرو -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>ارتقِ بمستوى تداولك إلى الاحترافية</h1>
+                <p>الكتاب الشامل الذي سيغير مسارك في عالم الفوركس - من الصفر إلى الاحتراف في رحلة واحدة مذهلة</p>
+                <a href="#contact" class="btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    احصل على الكتاب الآن
+                </a>
+            </div>
+            <div class="book-cover">
+                <div class="book-image">
+                    <img src="1.jpg" alt="غلاف كتاب فوركس بروفيشينال">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- عن الكتاب -->
+    <section id="about" class="container">
+        <h2 class="section-title">لماذا هذا الكتاب مميز؟</h2>
+        <div class="features">
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🚀</div>
+                <h3>انطلاق سريع</h3>
+                <p>ابدأ التداول بثقة مع منهجية واضحة وخطوات عملية مجربة</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🛡️</div>
+                <h3>حماية متكاملة</h3>
+                <p>نظام إدارة مخاطر يحافظ على رأس مالك ويحميك من الخسائر الكبيرة</p>
+            </div>
+            <div class="feature-card fade-in">
+                <div class="feature-icon">💡</div>
+                <h3>استراتيجيات ذكية</h3>
+                <p>خطط تداول ذكية تناسب جميع الظروف والأسواق المختلفة</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- محتويات الكتاب -->
+    <section id="contents" class="contents">
+        <div class="container">
+            <h2 class="section-title">ماذا ستتعلم في هذا الكتاب؟</h2>
+            <div class="chapters">
+                <div class="chapter fade-in">
+                    <h3>🎯 الفصل 1: الأسس المتينة</h3>
+                    <p>بناء فهم قوي لأسواق المال والمفاهيم الأساسية للتداول الناجح</p>
+                </div>
+                <div class="chapter fade-in">
+                    <h3>📊 الفصل 2: التحليل المتقدم</h3>
+                    <p>إتقان أدوات التحليل الفني والأساسي باحترافية</p>
+                </div>
+                <div class="chapter fade-in">
+                    <h3>⚡ الفصل 3: الاستراتيجيات الذكية</h3>
+                    <p>خطط تداول متنوعة تناسب شخصيتك وأهدافك</p>
+                </div>
+                <div class="chapter fade-in">
+                    <h3>💰 الفصل 4: إدارة رأس المال</h3>
+                    <p>أسس الحفاظ على رأس المال وزيادته بذكاء</p>
+                </div>
+                <div class="chapter fade-in">
+                    <h3>🧠 الفصل 5: علم النفس التداولي</h3>
+                    <p>التحكم في المشاعر وبناء عقلية المتداول الناجح</p>
+                </div>
+                <div class="chapter fade-in">
+                    <h3>🎁 الفصل 6: الأدوات المجانية</h3>
+                    <p>مجموعة من القوالب والأدوات الجاهزة للاستخدام</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم التواصل والشراء -->
+    <section id="contact" class="contact">
+        <div class="contact-content">
+            <h2 class="section-title" style="color: white;">احصل على الكتاب الآن</h2>
+            
+            <div class="price-card fade-in">
+                <h3>النسخة الكاملة الشاملة</h3>
+                <div class="price">$29</div>
+                
+                <ul class="benefits">
+                    <li><i class="fas fa-check-circle"></i> تحميل فوري بعد التأكيد</li>
+                    <li><i class="fas fa-check-circle"></i> تحديثات مجانية دائمة</li>
+                    <li><i class="fas fa-check-circle"></i> ملفات وقوالب إضافية</li>
+                    <li><i class="fas fa-check-circle"></i> دعم مباشر ومستمر</li>                   
+                </ul>
+                
+                <p style="margin: 2rem 0; font-size: 1.2rem;">تواصل معنا مباشرة للطلب والاستفسار:</p>
+                
+                <div class="social-links">
+                    <a href="https://wa.me/+249129237115?text=مرحباً، أريد شراء كتاب فوركس بروفيشينال" class="social-btn whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        واتساب للطلب
+                    </a>
+                </div>
+                
+                <p style="opacity: 0.8; margin-top: 2rem;">نحن هنا لمساعدتك على مدار الساعة</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="container">
+        	<p>© 2025 فوركس بروفيشينال. جميع الحقوق محف.</p>
+            <p style="margin-top: 1rem; opacity: 0.8;">رحلة ألف ميل تبدأ بخطوة... ورحلة الاحتراف تبدأ بهذا الكتاب</p>
+        </div>
+    </footer>
+
+    <script>
+        // تأثير التمرير
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(el => observer.observe(el));
+        
+        // تأثير الهيدر
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(30, 60, 114, 0.95)';
+                header.style.backdropFilter = 'blur(20px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)';
+                header.style.backdropFilter = 'blur(10px)';
+            }
+        });
+        
+        // تأثيرات الأزرار
+        document.querySelectorAll('.btn, .social-btn').forEach(btn => {
+            btn.addEventListener('mouseenter', function(e) {
+                this.style.transform = 'translateY(-5px) scale(1.05)';
+            });
+            
+            btn.addEventListener('mouseleave', function(e) {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
